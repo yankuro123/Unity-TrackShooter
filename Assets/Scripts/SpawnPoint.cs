@@ -28,7 +28,7 @@ public class SpawnPoint : MonoBehaviour
         if(elapsedTime > secondsBetweenSpawn)
         {
             Vector2 spawnPosition = new Vector2(Spawn.position.x, Spawn.position.y);
-            GameObject newEnemy = (GameObject)Instantiate(Enemy, spawnPosition, Quaternion.identity);
+            GameObject newEnemy = (GameObject)Instantiate(Enemy, spawnPosition, Quaternion.identity) as GameObject;
             elapsedTime = 0;
             if(Offset < 2.5f)
             {
