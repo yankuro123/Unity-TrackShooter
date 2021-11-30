@@ -6,6 +6,8 @@ using TMPro;
 public class BulletCounter : MonoBehaviour
 {
     public static int Mag = 100;
+    public static int MagLeft = Mag;
+
     TMPro.TMP_Text Counter;
     // Start is called before the first frame update
     void Start()
@@ -16,6 +18,9 @@ public class BulletCounter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Counter.text = Mag + "/100";
+        if (Firing.reloading == false)
+            Counter.text = MagLeft + "/" + Mag;
+        else
+            Counter.text = "Reloading";
     }
 }

@@ -6,16 +6,19 @@ using TMPro;
 public class Firing : MonoBehaviour
 {
     public GameObject bullet;
+    public GameObject homing;
     public float force;
-    public float FireRate;
+    public  float FireRate;
     public Transform firingpos;
-    
+    public static bool reloading = false;
+    public static bool reloadedR = true;
+
 
     private float nextFire = 0.0f;
-    private bool reloading = false;
     // Start is called before the first frame update
     void Start()
     {
+
     }
 
     // Update is called once per frame
@@ -23,7 +26,7 @@ public class Firing : MonoBehaviour
     {
         if (Input.GetMouseButton(0) && Time.time > nextFire)
         {
-            if (BulletCounter.Mag > 0 && reloading == false)
+            if (BulletCounter.MagLeft > 0 && reloading == false)
             {
                 nextFire = Time.time + FireRate;
                 Vector2 firingposition = new Vector2(firingpos.position.x, firingpos.position.y);
@@ -34,16 +37,20 @@ public class Firing : MonoBehaviour
                 projectile.GetComponent<BoxCollider2D>();
                 projectile.GetComponent<BoxCollider2D>().isTrigger = true;
                 projectile.AddComponent<OutOfScreenDestroy>();
-                BulletCounter.Mag -= 1;
+                BulletCounter.MagLeft -= 1;
             }
-            else
+            else if (BulletCounter.MagLeft == 0 || reloading == true)
                 return;
         }
-        if(Input.GetKeyDown(KeyCode.R) && BulletCounter.Mag < 100)
+       /* if(Input.GetMouseButton(1) && reloadedR == true)
+        {
+
+        }*/
+        if(Input.GetKeyDown(KeyCode.R) && BulletCounter.MagLeft < BulletCounter.Mag)
         {
             reloading = true;
             StartCoroutine(Reloading());
-            reloading = false;
+            
         }
 
     }
@@ -52,6 +59,7 @@ public class Firing : MonoBehaviour
     {
         Debug.Log("Reloading");
         yield return new WaitForSeconds(2.0f);
-        BulletCounter.Mag = 10;
+        BulletCounter.MagLeft = BulletCounter.Mag;
+        reloading = false;
     }
 }
