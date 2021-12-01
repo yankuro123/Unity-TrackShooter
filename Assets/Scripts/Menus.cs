@@ -21,12 +21,19 @@ public class Menus : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.Escape) && PauseAndShop.PauseLock == true)
+        {
+            ContinuePlaying();
+        }
     }
     void ContinuePlaying()
     {
         if(PauseAndShop.pause == true)
         {
+            Cursor.visible = false;
+            /*EnemyLogic.speed = 0.2f;
+            EnemyLogic.enemy.velocity = SpawnPoint.MovementRetain * EnemyLogic.speed;*/
+            MountLogic.Mount.velocity = new Vector2(1f, 0f) * MountLogic.retainF;
             PauseAndShop.pause = false;
             PauseAndShop.PauseLock = false;
             PauseCanvas.gameObject.SetActive(false);           

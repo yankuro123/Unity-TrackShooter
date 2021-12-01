@@ -26,23 +26,37 @@ public class PauseAndShop : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.Escape) && PauseLock == false)
+        {
+            PauseGame();
+        }
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            MovetoShop();
+        }
     }
 
     void PauseGame()
     {
         Debug.Log("Pause Clicked");
-        if (PauseLock == false)
-        {
-            PauseLock = true;
-            pause = true;
-            PauseCanvas.gameObject.SetActive(true);
-            Debug.Log("Paused");
-        }
+        /*EnemyLogic.speed = 0.0f;
+        EnemyLogic.enemy.velocity = SpawnPoint.MovementRetain * EnemyLogic.speed;*/
+        //Time.timeScale = 0;
+        Cursor.visible = false;
+        MountLogic.retainF = MountLogic.Mount.velocity.x;
+        PauseLock = true;
+        pause = true;
+        PauseCanvas.gameObject.SetActive(true);
+        Debug.Log("Paused");
     }
 
     void MovetoShop()
     {
-
+        if (PauseLock == false)
+        {
+            MountLogic.retainF = MountLogic.Mount.velocity.x;
+            PauseLock = true;
+            pause = true;
+        }
     }
 }

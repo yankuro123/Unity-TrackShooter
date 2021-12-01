@@ -24,35 +24,38 @@ public class Firing : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButton(0) && Time.time > nextFire)
+        if (PauseAndShop.pause == false)
         {
-            if (BulletCounter.MagLeft > 0 && reloading == false)
+            if (Input.GetMouseButton(0) && Time.time > nextFire)
             {
-                nextFire = Time.time + FireRate;
-                Vector2 firingposition = new Vector2(firingpos.position.x, firingpos.position.y);
-                GameObject projectile = Instantiate(bullet, firingposition, Quaternion.identity) as GameObject;
-                projectile.GetComponent<Rigidbody2D>().AddForce(transform.up * force);
-                projectile.GetComponent<Rigidbody2D>().collisionDetectionMode = CollisionDetectionMode2D.Continuous;
-                projectile.AddComponent<BoxCollider2D>();
-                projectile.GetComponent<BoxCollider2D>();
-                projectile.GetComponent<BoxCollider2D>().isTrigger = true;
-                projectile.AddComponent<OutOfScreenDestroy>();
-                BulletCounter.MagLeft -= 1;
+                if (BulletCounter.MagLeft > 0 && reloading == false)
+                {
+                    nextFire = Time.time + FireRate;
+                    Vector2 firingposition = new Vector2(firingpos.position.x, firingpos.position.y);
+                    GameObject projectile = Instantiate(bullet, firingposition, Quaternion.identity) as GameObject;
+                    projectile.GetComponent<Rigidbody2D>().AddForce(transform.up * force);
+                    projectile.GetComponent<Rigidbody2D>().collisionDetectionMode = CollisionDetectionMode2D.Continuous;
+                    projectile.AddComponent<BoxCollider2D>();
+                    projectile.GetComponent<BoxCollider2D>();
+                    projectile.GetComponent<BoxCollider2D>().isTrigger = true;
+                    projectile.AddComponent<OutOfScreenDestroy>();
+                    BulletCounter.MagLeft -= 1;
+                }
+                else if (BulletCounter.MagLeft == 0 || reloading == true)
+                    return;
             }
-            else if (BulletCounter.MagLeft == 0 || reloading == true)
-                return;
-        }
-       /* if(Input.GetMouseButton(1) && reloadedR == true)
-        {
+            /* if(Input.GetMouseButton(1) && reloadedR == true)
+             {
 
-        }*/
-        if(Input.GetKeyDown(KeyCode.R) && BulletCounter.MagLeft < BulletCounter.Mag)
-        {
-            reloading = true;
-            StartCoroutine(Reloading());
-            
-        }
+             }*/
+            if (Input.GetKeyDown(KeyCode.R) && BulletCounter.MagLeft < BulletCounter.Mag)
+            {
+                reloading = true;
+                StartCoroutine(Reloading());
 
+            }
+
+        }
     }
 
     IEnumerator Reloading()

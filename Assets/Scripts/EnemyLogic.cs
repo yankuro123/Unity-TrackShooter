@@ -2,19 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyHitpoint : MonoBehaviour
+public class EnemyLogic : MonoBehaviour
 {
 
     public static int Damge = 1;
     public int enemyHealth;
+    public static float speed;
+    public static Rigidbody2D enemy;
     private bool minus = false;
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (enemyHealth == 1)
-            Destroy(gameObject);
-        else
-            minus = true;
 
+    void Awake()
+    {
+        enemy = gameObject.GetComponent<Rigidbody2D>();    
     }
     private void Update()
     {
@@ -31,5 +30,14 @@ public class EnemyHitpoint : MonoBehaviour
                 gameObject.GetComponent<SpriteRenderer>().color = Color.red;
             }
         }
+
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (enemyHealth == 1)
+            Destroy(gameObject);
+        else
+            minus = true;
+
     }
 }

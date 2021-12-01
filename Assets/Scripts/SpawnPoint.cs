@@ -8,38 +8,55 @@ public class SpawnPoint : MonoBehaviour
     public float secondsBetweenSpawn;
     public float elapsedTime;
     public Transform Player;
+    //public float seconds;
     Vector2 pointA = new Vector2(-10.95f, 6f);
     Vector2 pointB = new Vector2(10.95f, 6f);
+    public static Vector2 direction;
+    public static Vector2 MovementRetain;
+    public float Timer;
+    public float OffsetRate;
 
     private Transform Spawn;
     private float Offset = 0f;
     // Start is called before the first frame update
     void Start()
     {
-        Spawn = GetComponent<Transform>();  
+        Spawn = GetComponent<Transform>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        Vector2 direction = Player.position - Spawn.position;
-        float time = Time.time * 0.3f;
-        secondsBetweenSpawn = 3.0f - Offset;
-        transform.position = Vector2.Lerp(pointA, pointB, Mathf.PingPong(time, 1));
-        elapsedTime += Time.deltaTime;
-        if(elapsedTime > secondsBetweenSpawn)
+        if (PauseAndShop.pause == false)
         {
-            Vector2 spawnPosition = new Vector2(Spawn.position.x, Spawn.position.y);
-            GameObject newEnemy = (GameObject)Instantiate(Enemy, spawnPosition, Quaternion.identity) as GameObject;
-            newEnemy.GetComponent<Rigidbody2D>().velocity = direction * 0.2f;
-            newEnemy.AddComponent<OutOfScreenDestroy>();
-            newEnemy.AddComponent<EnemyHitpoint>();
-            elapsedTime = 0;
-            if(Offset < 2.5f)
+            Time.timeScale = 1;
+            EnemyLogic.speed = 0.2f;
+            direction = Player.position - Spawn.position;
+            float time = Time.time * 0.3f;
+            secondsBetweenSpawn = Timer - Offset;
+            transform.position = Vector2.Lerp(pointA, pointB, Mathf.PingPong(time, 1));
+            elapsedTime += Time.deltaTime;
+            if (elapsedTime > secondsBetweenSpawn)
             {
-                Offset += .01f;
-            }
+                Vector2 spawnPosition = new Vector2(Spawn.position.x, Spawn.position.y);
+                GameObject newEnemy = (GameObject)Instantiate(Enemy, spawnPosition, Quaternion.identity) as GameObject;
+                newEnemy.GetComponent<Rigidbody2D>().velocity = direction * EnemyLogic.speed;
+                MovementRetain = direction;
+                newEnemy.AddComponent<OutOfScreenDestroy>();
+                newEnemy.AddComponent<EnemyLogic>();
+                elapsedTime = 0;
+                if (secondsBetweenSpawn >= 0.5f)
+                {
+                    Offset += OffsetRate;
+                }
 
+            }
+        }
+        else
+        {
+            Time.timeScale = 0;
+            return;
         }
     }
 }
+
