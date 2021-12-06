@@ -5,22 +5,20 @@ using UnityEngine;
 public class EnemyLogic : MonoBehaviour
 {
 
-    public static int Damge = 1;
+    public static int DamgeGun;
+    public static int DamgeCanon;
     public int enemyHealth;
     public static float speed;
     public static Rigidbody2D enemy;
-    private bool minus = false;
+    public int BaseMoney = 15;
 
-    void Awake()
+    private bool minus = false;
+    void Start()
     {
-        enemy = gameObject.GetComponent<Rigidbody2D>();    
+        enemy = gameObject.GetComponent<Rigidbody2D>();
     }
     private void Update()
     {
-        if(minus == true)
-        {
-            enemyHealth -= Damge;
-            minus = false;
             if(enemyHealth == 4)
             {
                 gameObject.GetComponent<SpriteRenderer>().color = Color.yellow;
@@ -29,15 +27,37 @@ public class EnemyLogic : MonoBehaviour
             {
                 gameObject.GetComponent<SpriteRenderer>().color = Color.red;
             }
+        if (Money.EnemyCounter == 10)
+        {
+            Money.Bonus += 5;
+            Money.EnemyCounter = 0;
         }
+        else
+            return;
 
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (enemyHealth == 1)
-            Destroy(gameObject);
-        else
-            minus = true;
+        if (collision.gameObject.tag == "SmallCaliber")
+        {
+            enemyHealth -= DamgeGun;
+            if (enemyHealth <= 0)
+            {
+                Money.EnemyCounter += 1;
+                Destroy(gameObject);
+                Money.MoneyCount += (BaseMoney + Money.Bonus);
+            }
+        }
+        else if (collision.gameObject.tag == "LargeCaliber")
+        {
+            enemyHealth -= DamgeCanon;
+            if (enemyHealth <= 0)
+            {
+                Money.EnemyCounter += 1;
+                Destroy(gameObject);
+                Money.MoneyCount += (BaseMoney + Money.Bonus);
+            }
+        }
 
     }
 }

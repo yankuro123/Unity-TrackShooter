@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BaseLine : MonoBehaviour
 {
@@ -13,26 +14,41 @@ public class BaseLine : MonoBehaviour
         baseline = gameObject.GetComponent<Rigidbody2D>();
         MaxHealth = 100f;
         health = MaxHealth;
-        InvokeRepeating("Healing", 1.0f, 60.0f);
+        InvokeRepeating("Healing", 0.0f, .001f);
     }
 
     // Update is called once per frame
     void Update()
     {     
-    }  
+    }
     void OnCollisionEnter2D(Collision2D collision)
     {
-        Destroy(collision.gameObject);
-        health -= 10f;
-        healthBar.UpdateHealthBar();
+        if (collision.gameObject.tag == "Enemy")
+        {
+            Destroy(collision.gameObject);
+            if ((health-=10f) > 0)
+                health -= 10f;
+            else
+                health = 0;
+            healthBar.UpdateHealthBar();          
+        }
+        if (health == 0)
+        {
+            Debug.Log("Move to Losing Scene");
+        }
+        else
+            return;
     }
     void Healing()
     {
-        if (health < 100)
+        if (PauseAndShop.pause == false)
         {
-            Debug.Log("Healing");
-            health += 10;
-            healthBar.UpdateHealthBar();
+            if (health < 100 && health > 0)
+            {
+                Debug.Log("Healing");
+                health += 0.0002f;
+                healthBar.UpdateHealthBar();
+            }
         }
     }
 }

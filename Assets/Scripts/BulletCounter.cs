@@ -13,14 +13,37 @@ public class BulletCounter : MonoBehaviour
     void Start()
     {
         Counter = GetComponent<TMP_Text>();
+        Gunpicker.Manager = 1;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Firing.reloading == false)
-            Counter.text = MagLeft + "/" + Mag;
-        else
-            Counter.text = "Reloading";
+        if(Gunpicker.Manager == 1)
+        {
+            if (Firing.reloading == false)
+            {
+                if (MagLeft <= 20)
+                {
+                    Counter.color = Color.red;
+                    Counter.text = MagLeft + "/" + Mag;
+                }
+                else
+                {
+                    Counter.color = Color.white;
+                    Counter.text = MagLeft + "/" + Mag;
+                }
+            }
+            else
+            {
+                Counter.color = Color.white;
+                Counter.text = "Reloading";
+            } 
+        }
+        else if (Gunpicker.Manager == 2)
+        {
+            Counter.text = "Ready";
+        }
+
     }
 }

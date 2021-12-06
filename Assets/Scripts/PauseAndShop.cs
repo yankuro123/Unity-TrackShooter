@@ -26,10 +26,10 @@ public class PauseAndShop : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && PauseLock == false)
+        /*if (Input.GetKeyDown(KeyCode.Escape) && PauseLock == false)
         {
             PauseGame();
-        }
+        }*/
         if (Input.GetKeyDown(KeyCode.S))
         {
             MovetoShop();
