@@ -34,18 +34,17 @@ public class SpawnPoint : MonoBehaviour
         {
             Time.timeScale = 1;
             EnemyLogic.speed = 0.2f;
-            Vector2 SpawnPointtest = new Vector2 (pointA, 6f);
-            transform.position = SpawnPointtest;
+            Vector2 SpawnPoint = new Vector2 (pointA, 6f);
+            transform.position = SpawnPoint;
             direction = Player.position - transform.position;            
-            float time = Time.time * 0.3f;
+            //float time = Time.time * 0.3f;
             secondsBetweenSpawn = Timer - Offset;
             elapsedTime += Time.deltaTime;
             if (elapsedTime > secondsBetweenSpawn)
             {
-                GameObject newEnemy = (GameObject)Instantiate(Enemy, SpawnPointtest, Quaternion.identity) as GameObject;
+                GameObject newEnemy = (GameObject)Instantiate(Enemy, SpawnPoint, Quaternion.identity) as GameObject;
                 newEnemy.GetComponent<Rigidbody2D>().velocity = direction * EnemyLogic.speed;
                 MovementRetain = direction;
-                newEnemy.AddComponent<OutOfScreenDestroy>();
                 newEnemy.AddComponent<EnemyLogic>();
                 elapsedTime = 0;
                 if (secondsBetweenSpawn >= 0.5f)
@@ -54,12 +53,13 @@ public class SpawnPoint : MonoBehaviour
                 }
 
             }
+
         }
         else
         {
             Time.timeScale = 0;
             return;
         }
-    }
+    } 
 }
 

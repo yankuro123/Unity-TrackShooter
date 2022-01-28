@@ -9,4 +9,9 @@ public class OnCollideDestroy : MonoBehaviour
     {
         Destroy(gameObject);
     }
+    private void OnBecameInvisible()
+    {
+        Debug.Log("Object Invisible");
+        Destroy(gameObject);
+    }
 }

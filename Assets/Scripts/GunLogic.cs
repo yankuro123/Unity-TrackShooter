@@ -25,7 +25,7 @@ public class GunLogic : MonoBehaviour
             target.GetComponent<SpriteRenderer>().enabled = true;
         }
         else
-            target.GetComponent<SpriteRenderer>().enabled = false;
+        target.GetComponent<SpriteRenderer>().enabled = false;
         Vector2 Cursor = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Target.position = new Vector2(Cursor.x, Cursor.y);
         direction = Target.position - transform.position;

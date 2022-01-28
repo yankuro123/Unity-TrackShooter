@@ -7,6 +7,7 @@ public class BulletCounter : MonoBehaviour
 {
     public static int Mag = 100;
     public static int MagLeft = Mag;
+    public float test;
 
     TMPro.TMP_Text Counter;
     // Start is called before the first frame update
@@ -21,8 +22,9 @@ public class BulletCounter : MonoBehaviour
     {
         if(Gunpicker.Manager == 1)
         {
-            if (Firing.reloading == false)
+            if (Firing.reloadingSub == false)
             {
+                Counter.enabled = true;
                 if (MagLeft <= 20)
                 {
                     Counter.color = Color.red;
@@ -36,13 +38,18 @@ public class BulletCounter : MonoBehaviour
             }
             else
             {
+                Counter.enabled = false;
                 Counter.color = Color.white;
                 Counter.text = "Reloading";
             } 
         }
         else if (Gunpicker.Manager == 2)
         {
-            Counter.text = "Ready";
+            Counter.color = Color.white;
+            if (Firing.reloadingMain == false)
+                Counter.text = "Ready";
+            else
+                Counter.text = "Reloading";
         }
 
     }

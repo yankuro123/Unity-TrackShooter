@@ -19,7 +19,7 @@ public class Gunpicker : MonoBehaviour
             Manager = 1;
             Debug.Log("Selected SubGun");
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             Manager = 2;
             Debug.Log("Selected MainGun");
