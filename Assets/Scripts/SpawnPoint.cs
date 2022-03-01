@@ -34,7 +34,7 @@ public class SpawnPoint : MonoBehaviour
         {
             Time.timeScale = 1;
             EnemyLogic.speed = 0.2f;
-            Vector2 SpawnPoint = new Vector2 (pointA, 6f);
+            Vector2 SpawnPoint = new Vector2 (pointA, 5f);
             transform.position = SpawnPoint;
             direction = Player.position - transform.position;            
             //float time = Time.time * 0.3f;

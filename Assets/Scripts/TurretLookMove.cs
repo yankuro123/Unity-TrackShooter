@@ -45,8 +45,8 @@ public class TurretLookMove : MonoBehaviour
             {
                 MainTurret.Marked = false;
                 firing = true;
-                GameObject marker1 = GameObject.FindGameObjectWithTag("Marker");
-                Object.Destroy(marker1);
+                /*GameObject marker1 = GameObject.FindGameObjectWithTag("Marker");
+                Object.Destroy(marker1);*/
             }
           
         }

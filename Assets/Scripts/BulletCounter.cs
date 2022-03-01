@@ -39,8 +39,8 @@ public class BulletCounter : MonoBehaviour
             else
             {
                 Counter.enabled = false;
-                Counter.color = Color.white;
-                Counter.text = "Reloading";
+               /* Counter.color = Color.white;
+                Counter.text = "Reloading";*/
             } 
         }
         else if (Gunpicker.Manager == 2)

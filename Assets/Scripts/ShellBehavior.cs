@@ -19,8 +19,13 @@ public class ShellBehavior : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         shell.GetComponent<Rigidbody2D>().velocity = new Vector2(0,0) ;
-        if (collision.gameObject.tag == "Enemy")
+        if (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "Marker")
+        {
             anim.SetInteger("AnimationStates", 1);
+            GameObject marker1 = GameObject.FindGameObjectWithTag("Marker");
+            Object.Destroy(marker1);
+        }
+
         else
             return;
     }

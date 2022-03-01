@@ -52,6 +52,7 @@ public class PauseAndShop : MonoBehaviour
 
     void MovetoShop()
     {
+        Debug.Log("To shop");
         if (PauseLock == false)
         {
             MountLogic.retainF = MountLogic.Mount.velocity.x;

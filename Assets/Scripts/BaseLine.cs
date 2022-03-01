@@ -50,5 +50,7 @@ public class BaseLine : MonoBehaviour
                 healthBar.UpdateHealthBar();
             }
         }
+        else
+            return;
     }
 }
