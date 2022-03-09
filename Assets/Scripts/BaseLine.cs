@@ -12,8 +12,9 @@ public class BaseLine : MonoBehaviour
     void Start()
     {
         baseline = gameObject.GetComponent<Rigidbody2D>();
-        MaxHealth = 100f;
+        MaxHealth = StatManager.BaseHealth;
         health = MaxHealth;
+        Debug.Log(StatManager.BaseHealth);
         InvokeRepeating("Healing", 0.0f, .001f);
     }
 
@@ -46,7 +47,7 @@ public class BaseLine : MonoBehaviour
             if (health < 100 && health > 0)
             {
                 Debug.Log("Healing");
-                health += 0.0002f;
+                health += StatManager.BaseRegen;
                 healthBar.UpdateHealthBar();
             }
         }

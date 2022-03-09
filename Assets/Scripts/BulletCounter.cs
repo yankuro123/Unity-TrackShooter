@@ -5,14 +5,15 @@ using TMPro;
 
 public class BulletCounter : MonoBehaviour
 {
-    public static int Mag = 100;
-    public static int MagLeft = Mag;
+    public static int Mag;
+    public static int MagLeft;
     public float test;
-
     TMPro.TMP_Text Counter;
     // Start is called before the first frame update
     void Start()
     {
+        Mag = StatManager.Magazine;
+        MagLeft = Mag;
         Counter = GetComponent<TMP_Text>();
         Gunpicker.Manager = 1;
     }

@@ -7,7 +7,7 @@ public class TurretLookMove : MonoBehaviour
     public Transform Target;
     //public Transform Mark;
     public static Rigidbody2D Marker;
-    public float Speed;
+    //public float Speed;
     public static bool firing = false;
     public bool firingtest;
     // Start is called before the first frame update
@@ -30,7 +30,7 @@ public class TurretLookMove : MonoBehaviour
             if (Gunpicker.Manager == 2 && Input.GetMouseButtonDown(0))
             {
                 Vector2 target = new Vector2(Target.position.x, Target.position.y);
-                transform.position = Vector2.MoveTowards(transform.position, target, Speed * Time.deltaTime);
+                transform.position = Vector2.MoveTowards(transform.position, target, StatManager.RotatingSpeed * Time.deltaTime);
             }
 
         }
@@ -39,7 +39,7 @@ public class TurretLookMove : MonoBehaviour
             Transform marker = GameObject.FindGameObjectWithTag("Marker").transform;
             if(transform.position != marker.position)
             {
-                transform.position = Vector2.MoveTowards(transform.position, marker.position, Speed * Time.deltaTime);
+                transform.position = Vector2.MoveTowards(transform.position, marker.position, StatManager.RotatingSpeed * Time.deltaTime);
             }
             else
             {

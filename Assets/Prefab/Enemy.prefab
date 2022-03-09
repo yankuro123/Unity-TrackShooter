@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5821939778647665725}
   - component: {fileID: 1650335255}
   - component: {fileID: -6573065024154589470}
-  - component: {fileID: 8049685592920373210}
+  - component: {fileID: 4165579229465780147}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -132,7 +132,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!114 &8049685592920373210
+--- !u!114 &4165579229465780147
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -144,5 +144,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9f31a2abcf402346b08b77ca7a6150d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyHealth: 6
+  RemainHealth: 0
   BaseMoney: 15
+  test: 0
+  test1: 0
+  test2: 0

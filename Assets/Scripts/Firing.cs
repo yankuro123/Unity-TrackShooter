@@ -7,16 +7,16 @@ public class Firing : MonoBehaviour
 {
     public GameObject bullet;
     public GameObject shell;
-    public float forceBullet;
-    public float forceShell;
-    public  float FireRate;
+    //public float forceBullet;
+    //public float forceShell;
+    //public  float FireRate;
+    //public static float ReloadTimeMain;
+    //public static float ReloadTimeSub;
     public Transform firingposSub;
     public Transform firingposMain;
     public Transform target;
     public static bool reloadingSub = false;
     public static bool reloadingMain = false;
-    public static float ReloadTimeMain;
-    public static float ReloadTimeSub;
 
     private float nextFire = 0.0f;
     // Start is called before the first frame update
@@ -37,10 +37,10 @@ public class Firing : MonoBehaviour
                 {
                     if (BulletCounter.MagLeft > 0 && reloadingSub == false)
                     {
-                        nextFire = Time.time + FireRate;
+                        nextFire = Time.time + StatManager.FireRate;
                         Vector2 firingposition = new Vector2(firingposSub.position.x, firingposSub.position.y);
                         GameObject projectile = Instantiate(bullet, firingposition, Quaternion.identity) as GameObject;
-                        projectile.GetComponent<Rigidbody2D>().AddForce(firingposSub.up * forceBullet);
+                        projectile.GetComponent<Rigidbody2D>().AddForce(firingposSub.up * StatManager.forceSub);
                         projectile.GetComponent<Rigidbody2D>().collisionDetectionMode = CollisionDetectionMode2D.Continuous;
                         projectile.AddComponent<BoxCollider2D>();
                         projectile.GetComponent<BoxCollider2D>();
@@ -67,7 +67,7 @@ public class Firing : MonoBehaviour
                     GameObject projectile = Instantiate(shell, FiringPosition, rotation) as GameObject;
                     //projectile.GetComponent<Rigidbody2D>();
                     //projectile.GetComponent<Rigidbody2D>().AddForce(firingposMain.up * forceShell);
-                    projectile.GetComponent<Rigidbody2D>().velocity = ((firingposMain.up * forceShell) / projectile.GetComponent<Rigidbody2D>().mass) * Time.fixedDeltaTime;
+                    projectile.GetComponent<Rigidbody2D>().velocity = ((firingposMain.up * StatManager.forceMain) / projectile.GetComponent<Rigidbody2D>().mass) * Time.fixedDeltaTime;
                     projectile.GetComponent<Rigidbody2D>().collisionDetectionMode = CollisionDetectionMode2D.Continuous;
                     TurretLookMove.firing = false;
                     reloadingMain = true;
@@ -84,14 +84,14 @@ public class Firing : MonoBehaviour
     IEnumerator ReloadSub()
     {
         Debug.Log("Reloading Sub");
-        yield return new WaitForSeconds(ReloadTimeSub);
+        yield return new WaitForSeconds(StatManager.ReloadTimeSub);
         BulletCounter.MagLeft = BulletCounter.Mag;
         reloadingSub = false;
     }
     IEnumerator ReloadMain()
     {
         Debug.Log("Reloading Main");
-        yield return new WaitForSeconds(ReloadTimeMain);
+        yield return new WaitForSeconds(StatManager.ReloadTimeMain);
         reloadingMain = false;
     }
 }

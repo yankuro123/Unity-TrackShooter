@@ -45,7 +45,7 @@ public class SpawnPoint : MonoBehaviour
                 GameObject newEnemy = (GameObject)Instantiate(Enemy, SpawnPoint, Quaternion.identity) as GameObject;
                 newEnemy.GetComponent<Rigidbody2D>().velocity = direction * EnemyLogic.speed;
                 MovementRetain = direction;
-                newEnemy.AddComponent<EnemyLogic>();
+                //newEnemy.AddComponent<EnemyLogic>();
                 elapsedTime = 0;
                 if (secondsBetweenSpawn >= 0.5f)
                 {

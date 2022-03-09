@@ -5,9 +5,9 @@ using UnityEngine;
 public class MountLogic : MonoBehaviour
 {
     public static Rigidbody2D Mount;
-    public float push = 2.5f;
+    //public float Push = 2.5f;
     public Vector2 moving = new Vector2();
-    public float MaxVelocity = 15f;
+    //public float MaxVelocity = 15f;
     public static float retainF;
     public float velocity;
 
@@ -22,22 +22,22 @@ public class MountLogic : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
+            Debug.Log(StatManager.Accelerating);
             var ForceX = 0f;
             var absVel = Mathf.Abs(Mount.velocity.x);
         if (PauseAndShop.pause == false)
         {
-            if (absVel < MaxVelocity)
+            if (absVel < StatManager.MaxSpeed)
             {
                 if (Input.GetKey(KeyCode.A))
                 {
                     moving.x = -1;
-                    ForceX = moving.x * push;
+                    ForceX = moving.x * StatManager.Accelerating;
                 }
                 if (Input.GetKey(KeyCode.D))
                 {
                     moving.x = 1;
-                    ForceX = moving.x * push;
+                    ForceX = moving.x * StatManager.Accelerating;
                 }
             }
         }

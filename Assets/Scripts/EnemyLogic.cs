@@ -5,29 +5,41 @@ using UnityEngine;
 public class EnemyLogic : MonoBehaviour
 {
 
-    public static int DamgeGun = 1;
-    public static int DamgeCanon = 6;
-    public int enemyHealth = 6;
-    public static float speed;
+    //public static int DamgeGun = 1;
+    //public static int DamgeCanon = 6;
+    //public float enemyHealth = 30;
+    public float RemainHealth;
+    public static float speed = 1.0f;
     public static Rigidbody2D enemy;
     public int BaseMoney = 15;
+    public float test;
+    public float test1;
+    public float test2;
 
+    private float ThresholdYellow;
+    private float ThresholdRed; 
     //private bool minus = false;
     void Start()
     {
         enemy = gameObject.GetComponent<Rigidbody2D>();
+        RemainHealth = StatManager.enemyHealth;
+        ThresholdYellow = StatManager.enemyHealth * 0.5f;
+        ThresholdRed = StatManager.enemyHealth * 0.2f;
     }
     private void Update()
     {
-        if (enemyHealth == 4)
+        test = RemainHealth;
+        test1 = ThresholdYellow;
+        test2 = ThresholdRed;
+        if (RemainHealth <= ThresholdYellow)
         {
             gameObject.GetComponent<SpriteRenderer>().color = Color.yellow;
         }
-        else if (enemyHealth == 2)
+        if (RemainHealth <= ThresholdRed)
         {
             gameObject.GetComponent<SpriteRenderer>().color = Color.red;
         }
-        else if (enemyHealth <= 0)
+        if (RemainHealth <= 0)
         {
             Money.EnemyCounter += 1;
             Destroy(gameObject);
@@ -37,20 +49,20 @@ public class EnemyLogic : MonoBehaviour
         {
             Money.Bonus += 5;
             Money.EnemyCounter = 0;
+            StatManager.enemyHealth += StatManager.enemyHealth * 0.05f;
         }
         else
             return;
-
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "SmallCaliber")
         {
-            enemyHealth -= DamgeGun;
+            RemainHealth -= StatManager.damge;
         }
         else if (collision.gameObject.tag == "LargeCaliber")
         {
-            enemyHealth -= DamgeCanon;
+            RemainHealth -= StatManager.Damge;
         }
 
 
