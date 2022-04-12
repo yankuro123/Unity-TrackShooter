@@ -14,8 +14,8 @@ public class BaseLine : MonoBehaviour
         baseline = gameObject.GetComponent<Rigidbody2D>();
         MaxHealth = StatManager.BaseHealth;
         health = MaxHealth;
-        Debug.Log(StatManager.BaseHealth);
-        InvokeRepeating("Healing", 0.0f, .001f);
+        Debug.Log("Health " + StatManager.BaseHealth);
+        InvokeRepeating("Healing", 0.0f, 5f);
     }
 
     // Update is called once per frame

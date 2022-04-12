@@ -25,8 +25,7 @@ public class BulletCounter : MonoBehaviour
         {
             if (Firing.reloadingSub == false)
             {
-                Counter.enabled = true;
-                if (MagLeft <= 20)
+                if (MagLeft <= 10)
                 {
                     Counter.color = Color.red;
                     Counter.text = MagLeft + "/" + Mag;
@@ -39,18 +38,22 @@ public class BulletCounter : MonoBehaviour
             }
             else
             {
-                Counter.enabled = false;
-               /* Counter.color = Color.white;
-                Counter.text = "Reloading";*/
+                Counter.color = Color.white;
+                Counter.text = "Reloading";
             } 
         }
         else if (Gunpicker.Manager == 2)
         {
-            Counter.color = Color.white;
             if (Firing.reloadingMain == false)
+            {
+                Counter.color = Color.green;
                 Counter.text = "Ready";
+            }
             else
+            {
+                Counter.color = Color.red;
                 Counter.text = "Reloading";
+            }
         }
 
     }

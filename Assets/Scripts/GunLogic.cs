@@ -23,6 +23,9 @@ public class GunLogic : MonoBehaviour
         if(Gunpicker.Manager == 1)
         {
             target.GetComponent<SpriteRenderer>().enabled = true;
+            //Vector2 Cursor = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            //Target.position = new Vector2(Cursor.x, Cursor.y);
+            //direction = Target.position - transform.position;
         }
         else
         target.GetComponent<SpriteRenderer>().enabled = false;

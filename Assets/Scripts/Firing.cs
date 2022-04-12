@@ -53,11 +53,11 @@ public class Firing : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.R) && BulletCounter.MagLeft < BulletCounter.Mag || BulletCounter.MagLeft == 0)
                 {
                     reloadingSub = true;
-                    StartCoroutine(ReloadSub());
+                   StartCoroutine(ReloadSub());
 
                 }
             }
-            else if (Gunpicker.Manager == 2 && reloadingMain == false)
+            if (reloadingMain == false)
             {
                 Vector2 relativePos = target.position - firingposMain.position;
                 Quaternion rotation = Quaternion.LookRotation(Vector3.forward, relativePos);
@@ -71,7 +71,7 @@ public class Firing : MonoBehaviour
                     projectile.GetComponent<Rigidbody2D>().collisionDetectionMode = CollisionDetectionMode2D.Continuous;
                     TurretLookMove.firing = false;
                     reloadingMain = true;
-                    StartCoroutine(ReloadMain());
+                   StartCoroutine(ReloadMain());
                 }
                 else
                     return;
@@ -80,7 +80,6 @@ public class Firing : MonoBehaviour
         else
             return;
     }
-
     IEnumerator ReloadSub()
     {
         Debug.Log("Reloading Sub");

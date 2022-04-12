@@ -20,11 +20,10 @@ public class MainTurret : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        direction = Marker.position - transform.position;
+        transform.up = direction;
         if (Gunpicker.Manager == 2)
         {
-            direction = Marker.position - transform.position;
-            transform.up = direction;
             aim.GetComponent<SpriteRenderer>().enabled = true;
             Vector2 Cursor = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Aim.position = new Vector2(Cursor.x, Cursor.y);

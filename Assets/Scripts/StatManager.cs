@@ -11,7 +11,7 @@ public class StatManager : MonoBehaviour
     public static float MountHealthStarting = 100f;
     //Base
     public static float BaseHealthStarting = 100f;
-    public static float BaseRegenStarting = 0.0002f;
+    public static float BaseRegenStarting = 2f;
     //SubGun
     public static int forceSubStarting = 350;
     public static float FireRateStarting = 0.3f;
@@ -21,7 +21,7 @@ public class StatManager : MonoBehaviour
     //Maingun
     public static int forceMainStarting = 300;
     public static float RotatingSpeedStarting = 3f;
-    public static float ReloadTimeMainStarting = 15f;
+    public static float ReloadTimeMainStarting = 1f;
     public static int DamgeStarting = 150;
     //Enemy
     public static float enemyHealthStarting = 30;
@@ -48,7 +48,7 @@ public class StatManager : MonoBehaviour
     //Enemy
     public static float enemyHealth;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         //Mount
         MaxSpeed = MaxSpeedStarting;
